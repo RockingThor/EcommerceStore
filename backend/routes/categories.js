@@ -19,6 +19,14 @@ router.get('/:id', async (req,res)=>{
     res.status(200).send(category);
 })
 
+router.get('/name/:name', async (req,res)=>{
+    const category= await Category.find({name : req.params.name});
+    if(!category){
+        res.status(500).json({message: 'The category with the given name doesnt match anything'})
+    }
+    res.status(200).send(category);
+})
+
 router.post('/',async (req,res)=>{
     let category= new Category({
         name: req.body.name,
